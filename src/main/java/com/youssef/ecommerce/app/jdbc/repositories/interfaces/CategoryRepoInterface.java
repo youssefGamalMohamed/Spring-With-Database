@@ -6,15 +6,15 @@ import java.util.Optional;
 
 public interface CategoryRepoInterface {
 
-    boolean isExistByNameIgnoreCase(String categoryName);
+    boolean isExistCategoryByNameIgnoreCase(String categoryName);
 
-    Category save(Category category) ;
+    Category saveCategory(Category category) ;
 
-    boolean existsById(Integer categoryId);
+    boolean existsCategoryById(Integer categoryId);
 
-    Optional<Category> findById(Integer categoryId);
+    Optional<Category> findCategoryById(Integer categoryId);
 
-    boolean deleteById(Integer categoryId);
+    boolean deleteCategoryById(Integer categoryId);
 
     boolean updateCategoryById(Integer categoryId , Category category);
 

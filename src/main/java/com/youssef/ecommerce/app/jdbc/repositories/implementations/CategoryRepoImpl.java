@@ -47,7 +47,7 @@ public class CategoryRepoImpl implements CategoryRepoInterface {
     private JdbcTemplate jdbcTemplate;
 
     @Override
-    public boolean isExistByNameIgnoreCase(String categoryName) {
+    public boolean isExistCategoryByNameIgnoreCase(String categoryName) {
         // Query to count categories with the given name (ignoring case)
         Integer count = jdbcTemplate.queryForObject(
                 SQL_QUERIES.SQl_COUNT_CATEGORIES_WITH_NAME_IGNORE_CASE,
@@ -62,7 +62,7 @@ public class CategoryRepoImpl implements CategoryRepoInterface {
     }
 
     @Override
-    public Category save(Category category) {
+    public Category saveCategory(Category category) {
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(
                 conn -> {
@@ -79,7 +79,7 @@ public class CategoryRepoImpl implements CategoryRepoInterface {
     }
 
     @Override
-    public boolean existsById(Integer categoryId) {
+    public boolean existsCategoryById(Integer categoryId) {
 
         // Query to count categories with the given id
         Integer count = jdbcTemplate.queryForObject(
@@ -95,7 +95,7 @@ public class CategoryRepoImpl implements CategoryRepoInterface {
     }
 
     @Override
-    public Optional<Category> findById(Integer categoryId) {
+    public Optional<Category> findCategoryById(Integer categoryId) {
         Category category = null;
         try {
             category = jdbcTemplate.queryForObject(SQL_QUERIES.SQL_FIND_CATEGORY_BY_ID , new CategoryRowMapper() , categoryId);
@@ -111,7 +111,7 @@ public class CategoryRepoImpl implements CategoryRepoInterface {
     }
 
     @Override
-    public boolean deleteById(Integer categoryId) {
+    public boolean deleteCategoryById(Integer categoryId) {
         int isDeleted = jdbcTemplate.update(SQL_QUERIES.SQL_DELETE_CATEGORY_BY_ID , categoryId);
         return (isDeleted == 1);
     }

@@ -13,6 +13,7 @@ import com.youssef.ecommerce.app.jdbc.services.interfaces.CategoryServiceInterfa
 import com.youssef.ecommerce.app.jdbc.services.interfaces.ProductCategoryServiceInterface;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -24,6 +25,7 @@ public class CategoryServiceImpl implements CategoryServiceInterface {
 
     // REPO
     @Autowired
+    @Qualifier("dataJdbcCategoryRepoImpl")
     private CategoryRepoInterface categoryRepo;
 
 
@@ -34,14 +36,14 @@ public class CategoryServiceImpl implements CategoryServiceInterface {
 
     @Override
     public AddCategoryResponseBody addNewCategory(AddCategoryRequestBody categoryRequestBody) {
-        if(categoryRepo.isExistByNameIgnoreCase(categoryRequestBody.getName())) {
+        if(categoryRepo.isExistCategoryByNameIgnoreCase(categoryRequestBody.getName())) {
             log.error(">>>>> Category With Name = " + categoryRequestBody.getName() + " IS Already EXIST");
             return AddCategoryResponseBody.builder()
                     .id(null)
                     .build();
         }
         Category category = AddCategoryRequestBodyMapper.toEntity(categoryRequestBody);
-        category = categoryRepo.save(category);
+        category = categoryRepo.saveCategory(category);
 
         return AddCategoryResponseBody.builder()
                 .id(category.getId())
@@ -50,12 +52,12 @@ public class CategoryServiceImpl implements CategoryServiceInterface {
 
     @Override
     public boolean isCategoryExistsById(Integer categoryId) {
-        return categoryRepo.existsById(categoryId);
+        return categoryRepo.existsCategoryById(categoryId);
     }
 
     @Override
     public FindCategoryByIdResponse findById(Integer categoryId) {
-        Optional<Category> category = categoryRepo.findById(categoryId);
+        Optional<Category> category = categoryRepo.findCategoryById(categoryId);
         if(category.isEmpty()) {
             return FindCategoryByIdResponse.builder()
                     .id(null)
@@ -69,7 +71,7 @@ public class CategoryServiceImpl implements CategoryServiceInterface {
 
     @Override
     public boolean deleteById(Integer categoryId) {
-        return productCategoryService.deleteAllByCategoryId(categoryId) & categoryRepo.deleteById(categoryId);
+        return productCategoryService.deleteAllByCategoryId(categoryId) & categoryRepo.deleteCategoryById(categoryId);
     }
 
     @Override

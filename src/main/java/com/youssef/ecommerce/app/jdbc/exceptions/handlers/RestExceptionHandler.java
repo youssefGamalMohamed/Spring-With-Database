@@ -23,6 +23,7 @@ public class RestExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<HttpStatus> handleInternalServerError(Exception exception) {
+        exception.printStackTrace();
         log.error(">>>>> UnHandled Exception ==> " + exception);
         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
