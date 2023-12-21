@@ -2,6 +2,7 @@ package com.youssef.ecommerce.app.jdbc.mappers.sqls_rows;
 
 import com.youssef.ecommerce.app.jdbc.entities.Category;
 import com.youssef.ecommerce.app.jdbc.entities.Product;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
@@ -10,6 +11,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
+@Slf4j
 public class ProductWithCategoriesRowMapper implements RowMapper<Product> {
 
 
@@ -25,26 +27,29 @@ public class ProductWithCategoriesRowMapper implements RowMapper<Product> {
                 5,"category_id",
                 6,"name"
         );
-
         Product product = Product.builder()
+                .categories(new HashSet<>())
                 .build();
 
-        while (rs.next()) {
+
+        do {
+
             product.setId(rs.getInt(columnIndexesWithNames.get(1)));
             product.setName(rs.getString(columnIndexesWithNames.get(2)));
             product.setPrice(rs.getDouble(columnIndexesWithNames.get(4)));
             product.setQuantity(rs.getInt(columnIndexesWithNames.get(3)));
-            product.setCategories(new HashSet<>());
 
             Category category = Category.builder()
                     .id(rs.getInt(columnIndexesWithNames.get(5)))
-                    .name(rs.getString(columnIndexesWithNames.get(6)))
+                    .name(rs.getString(6))
                     .products(new HashSet<>())
                     .build();
 
             product.getCategories()
                     .add(category);
-        }
+
+        } while (rs.next());
+
 
         return product;
     }

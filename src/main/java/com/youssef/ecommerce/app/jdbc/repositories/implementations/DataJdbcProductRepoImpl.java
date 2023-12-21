@@ -34,7 +34,7 @@ public class DataJdbcProductRepoImpl implements ProductRepoInterface {
 
     @Override
     public Product findByIdWithCategories(Integer productId) {
-        return null;
+        return productRepo.findProductByIdWithCategories(productId);
     }
 
     @Override

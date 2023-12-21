@@ -63,6 +63,7 @@ public class CategoryServiceImpl implements CategoryServiceInterface {
                     .id(null)
                     .build();
         }
+        log.info(">>>>> Category = " + category);
         return FindCategoryByIdResponse.builder()
                 .id(category.get().getId())
                 .name(category.get().getName())

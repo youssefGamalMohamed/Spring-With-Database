@@ -5,6 +5,7 @@ import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.util.Set;
@@ -32,4 +33,7 @@ public class Product {
 
     @Transient
     private Set<Category> categories;
+
+    @MappedCollection(idColumn = "product_id" , keyColumn = "category_id")
+    private Set<ProductCategory> categoriesIds;
 }
