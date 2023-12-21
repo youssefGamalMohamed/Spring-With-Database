@@ -14,6 +14,7 @@ import com.youssef.ecommerce.app.jdbc.services.interfaces.ProductCategoryService
 import com.youssef.ecommerce.app.jdbc.services.interfaces.ProductServiceInterface;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
@@ -25,6 +26,7 @@ public class ProductServiceImpl implements ProductServiceInterface {
 
     // REPOS
     @Autowired
+    @Qualifier("dataJdbcProductRepoImpl")
     private ProductRepoInterface productRepo;
 
 
