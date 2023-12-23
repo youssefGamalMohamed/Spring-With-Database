@@ -54,11 +54,13 @@ public class DataJdbcCategoryRepoImpl implements CategoryRepoInterface {
 
     @Override
     public boolean updateCategoryById(Integer categoryId, Category category) {
-        Category categoryFromDB = categoryRepo.findById(categoryId).orElse(null);
-        if(categoryFromDB == null)
-            return false;
-        categoryFromDB.setName(category.getName());
-        categoryRepo.save(categoryFromDB);
+//        Category categoryFromDB = categoryRepo.findById(categoryId).orElse(null);
+//        if(categoryFromDB == null)
+//            return false;
+//        categoryFromDB.setName(category.getName());
+//        categoryRepo.save(categoryFromDB);
+
+        categoryRepo.updateCategoryById(categoryId , category.getName());
         return true;
     }
 }
