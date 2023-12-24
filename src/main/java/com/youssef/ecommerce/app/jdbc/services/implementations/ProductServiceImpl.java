@@ -38,8 +38,7 @@ public class ProductServiceImpl implements ProductServiceInterface {
     @Autowired
     private CategoryServiceInterface categoryService;
 
-    @Autowired
-    private ProductCategoryServiceInterface productCategoryService;
+
 
     @Override
     public AddProductResponseBody addNewProduct(AddProductRequestBody addProductRequestBody) {
@@ -101,7 +100,7 @@ public class ProductServiceImpl implements ProductServiceInterface {
 
     @Override
     public boolean deleteById(Integer productId) {
-        return productCategoryService.deleteAllByProductId(productId) & productRepo.deleteById(productId);
+        return productRepo.deleteById(productId);
     }
 
     @Override

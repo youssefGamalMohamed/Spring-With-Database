@@ -72,7 +72,7 @@ public class CategoryServiceImpl implements CategoryServiceInterface {
 
     @Override
     public boolean deleteById(Integer categoryId) {
-        return productCategoryService.deleteAllByCategoryId(categoryId) & categoryRepo.deleteCategoryById(categoryId);
+        return categoryRepo.deleteCategoryById(categoryId);
     }
 
     @Override
