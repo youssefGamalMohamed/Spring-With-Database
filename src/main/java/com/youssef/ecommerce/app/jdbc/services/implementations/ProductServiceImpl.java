@@ -101,7 +101,7 @@ public class ProductServiceImpl implements ProductServiceInterface {
 
     @Override
     public boolean deleteById(Integer productId) {
-        return productCategoryService.deleteAllByProductId(productId) & productRepo.deleteById(productId);
+        return productRepo.deleteById(productId);
     }
 
     @Override

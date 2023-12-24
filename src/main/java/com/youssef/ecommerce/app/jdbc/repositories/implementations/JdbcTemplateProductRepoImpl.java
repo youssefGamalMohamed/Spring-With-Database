@@ -154,7 +154,9 @@ public class JdbcTemplateProductRepoImpl implements ProductRepoInterface {
 
     @Override
     public boolean deleteById(Integer productId) {
-        return (jdbcTemplate.update(SQL_QUERIES.SQL_DELETE_PRODUCT_BY_ID, productId) == 1);
+        boolean isDeletedFromProductCategoryTable = jdbcTemplateProductCategoryRepo.deleteAllByProductId(productId);
+        boolean isDeleteFromProductTable = (jdbcTemplate.update(SQL_QUERIES.SQL_DELETE_PRODUCT_BY_ID, productId) == 1);
+        return  isDeletedFromProductCategoryTable & isDeleteFromProductTable;
     }
 
     @Override
