@@ -25,7 +25,7 @@ public class CategoryServiceImpl implements CategoryServiceInterface {
 
     // REPO
     @Autowired
-    @Qualifier("jdbcTemplateCategoryRepoImpl")
+    @Qualifier("dataJdbcCategoryRepoImpl")
     private CategoryRepoInterface categoryRepo;
 
 

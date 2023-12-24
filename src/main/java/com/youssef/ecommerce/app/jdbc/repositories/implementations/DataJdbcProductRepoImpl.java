@@ -1,12 +1,15 @@
 package com.youssef.ecommerce.app.jdbc.repositories.implementations;
 
+import com.youssef.ecommerce.app.jdbc.entities.Category;
 import com.youssef.ecommerce.app.jdbc.entities.Product;
+import com.youssef.ecommerce.app.jdbc.entities.ProductCategory;
 import com.youssef.ecommerce.app.jdbc.repositories.interfaces.DataJdbcProductRepoInterface;
 import com.youssef.ecommerce.app.jdbc.repositories.interfaces.ProductRepoInterface;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.stream.Collectors;
 
 
 @Repository
@@ -24,6 +27,16 @@ public class DataJdbcProductRepoImpl implements ProductRepoInterface {
 
     @Override
     public Product save(Product product) {
+        product.setCategoriesIds(
+                product.getCategories().stream()
+                        .map(category ->
+                                        ProductCategory.builder()
+                                                .productId(product.getId())
+                                                .categoryId(category.getId())
+                                                .build()
+                        )
+                        .collect(Collectors.toSet())
+        );
         return productRepo.save(product);
     }
 
