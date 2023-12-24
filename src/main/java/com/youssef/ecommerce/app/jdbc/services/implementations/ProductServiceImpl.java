@@ -38,8 +38,7 @@ public class ProductServiceImpl implements ProductServiceInterface {
     @Autowired
     private CategoryServiceInterface categoryService;
 
-    @Autowired
-    private ProductCategoryServiceInterface productCategoryService;
+
 
     @Override
     public AddProductResponseBody addNewProduct(AddProductRequestBody addProductRequestBody) {
