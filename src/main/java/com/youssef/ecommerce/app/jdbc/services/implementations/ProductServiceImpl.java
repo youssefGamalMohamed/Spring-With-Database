@@ -1,5 +1,6 @@
 package com.youssef.ecommerce.app.jdbc.services.implementations;
 
+import com.youssef.ecommerce.app.jdbc.entities.Category;
 import com.youssef.ecommerce.app.jdbc.entities.Product;
 import com.youssef.ecommerce.app.jdbc.mappers.responses.FindProductByIdResponseMapper;
 import com.youssef.ecommerce.app.jdbc.mappers.responses.FindProductByIdWithCategoriesResponseMapper;
@@ -17,7 +18,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.NoSuchElementException;
+import java.util.Optional;
+import java.util.Set;
 
 @Slf4j
 @Service
@@ -26,7 +30,7 @@ public class ProductServiceImpl implements ProductServiceInterface {
 
     // REPOS
     @Autowired
-    @Qualifier("dataJdbcProductRepoImpl")
+    @Qualifier("jdbcTemplateProductRepoImpl")
     private ProductRepoInterface productRepo;
 
 
@@ -47,13 +51,18 @@ public class ProductServiceImpl implements ProductServiceInterface {
         }
 
 
+        Set<Category> categories = new HashSet<>();
         // check existences of all Categories to assign it to the Product
         for (Integer categoryId : addProductRequestBody.getCategoriesIds()) {
-            if (!categoryService.isCategoryExistsById(categoryId)) {
+            Optional<Category> category = categoryService.findCategoryById(categoryId);
+            if (category.isEmpty()) {
                 throw new NoSuchElementException(
                         "Can't Add Product , Reason : ( No Category with ID = " + categoryId + " to assign the " +
                         "this category for the Product )"
                 );
+            }
+            else {
+                categories.add(category.get());
             }
         }
 
@@ -61,14 +70,10 @@ public class ProductServiceImpl implements ProductServiceInterface {
                 .name(addProductRequestBody.getName())
                 .price(addProductRequestBody.getPrice())
                 .quantity(addProductRequestBody.getQuantity())
+                .categories(categories)
                 .build();
 
         product = productRepo.save(product);
-
-
-
-        // Assign All Categories for specific Product
-        productCategoryService.assignCategoriesToProduct(product.getId() , addProductRequestBody.getCategoriesIds());
 
 
         return AddProductResponseBody.builder()

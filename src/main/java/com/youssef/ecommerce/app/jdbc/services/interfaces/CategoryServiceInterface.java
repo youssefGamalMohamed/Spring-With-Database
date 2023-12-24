@@ -6,6 +6,8 @@ import com.youssef.ecommerce.app.jdbc.models.requests.UpdateCategoryRequestBody;
 import com.youssef.ecommerce.app.jdbc.models.responses.AddCategoryResponseBody;
 import com.youssef.ecommerce.app.jdbc.models.responses.FindCategoryByIdResponse;
 
+import java.util.Optional;
+
 public interface CategoryServiceInterface {
     AddCategoryResponseBody addNewCategory(AddCategoryRequestBody categoryRequestBody);
 
@@ -17,4 +19,5 @@ public interface CategoryServiceInterface {
 
     boolean updateCategoryById(Integer categoryId, UpdateCategoryRequestBody updateCategoryRequestBody);
 
+    Optional<Category> findCategoryById(Integer categoryId);
 }

@@ -25,7 +25,7 @@ public class CategoryServiceImpl implements CategoryServiceInterface {
 
     // REPO
     @Autowired
-    @Qualifier("dataJdbcCategoryRepoImpl")
+    @Qualifier("jdbcTemplateCategoryRepoImpl")
     private CategoryRepoInterface categoryRepo;
 
 
@@ -78,6 +78,11 @@ public class CategoryServiceImpl implements CategoryServiceInterface {
     @Override
     public boolean updateCategoryById(Integer categoryId, UpdateCategoryRequestBody updateCategoryRequestBody) {
         return categoryRepo.updateCategoryById(categoryId , UpdateCategoryRequestBodyMapper.toEntity(updateCategoryRequestBody));
+    }
+
+    @Override
+    public Optional<Category> findCategoryById(Integer categoryId) {
+        return categoryRepo.findCategoryById(categoryId);
     }
 
 

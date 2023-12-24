@@ -1,5 +1,6 @@
 package com.youssef.ecommerce.app.jdbc.repositories.implementations;
 
+import com.youssef.ecommerce.app.jdbc.entities.Category;
 import com.youssef.ecommerce.app.jdbc.entities.Product;
 import com.youssef.ecommerce.app.jdbc.mappers.sqls_rows.ProductRowMapper;
 import com.youssef.ecommerce.app.jdbc.mappers.sqls_rows.ProductWithCategoriesRowMapper;
@@ -12,6 +13,8 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Repository
 @Slf4j
@@ -73,6 +76,9 @@ public class JdbcTemplateProductRepoImpl implements ProductRepoInterface {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    @Autowired
+    private JdbcTemplateProductCategoryRepoImpl jdbcTemplateProductCategoryRepo;
+
     @Override
     public boolean isExistProductByNameIgnoreCase(String productName) {
         // Query to count products with the given name (ignoring case)
@@ -106,6 +112,12 @@ public class JdbcTemplateProductRepoImpl implements ProductRepoInterface {
 
         product.setId(keyHolder.getKey().intValue());
 
+        Set<Integer> categoriesIds = product.getCategories()
+                .stream()
+                .map(Category::getId)
+                .collect(Collectors.toSet());
+
+        jdbcTemplateProductCategoryRepo.assignCategoriesToProduct(product.getId() , categoriesIds);
         return product;
     }
 
