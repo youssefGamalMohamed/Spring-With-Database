@@ -29,10 +29,6 @@ public class CategoryServiceImpl implements CategoryServiceInterface {
     private CategoryRepoInterface categoryRepo;
 
 
-    //SERVICE
-    @Autowired
-    private ProductCategoryServiceInterface productCategoryService;
-
 
     @Override
     public AddCategoryResponseBody addNewCategory(AddCategoryRequestBody categoryRequestBody) {
