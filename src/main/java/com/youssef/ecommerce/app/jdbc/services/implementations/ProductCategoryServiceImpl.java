@@ -1,7 +1,7 @@
 package com.youssef.ecommerce.app.jdbc.services.implementations;
 
 import com.youssef.ecommerce.app.jdbc.entities.ProductCategory;
-import com.youssef.ecommerce.app.jdbc.repositories.implementations.ProductCategoryRepoImpl;
+import com.youssef.ecommerce.app.jdbc.repositories.implementations.JdbcTemplateProductCategoryRepoImpl;
 import com.youssef.ecommerce.app.jdbc.services.interfaces.ProductCategoryServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,7 @@ import java.util.Set;
 public class ProductCategoryServiceImpl implements ProductCategoryServiceInterface {
 
     @Autowired
-    private ProductCategoryRepoImpl productCategoryRepo;
+    private JdbcTemplateProductCategoryRepoImpl productCategoryRepo;
 
 
     @Override

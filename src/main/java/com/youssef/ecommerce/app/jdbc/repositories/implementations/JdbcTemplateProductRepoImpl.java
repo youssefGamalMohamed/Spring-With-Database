@@ -12,11 +12,10 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
-import java.util.Optional;
 
 @Repository
 @Slf4j
-public class ProductRepoImpl implements ProductRepoInterface {
+public class JdbcTemplateProductRepoImpl implements ProductRepoInterface {
 
 
     public static class PRODUCT_TABLE {
@@ -45,7 +44,7 @@ public class ProductRepoImpl implements ProductRepoInterface {
                 + """
                 INNER JOIN
                 """ +
-                ProductCategoryRepoImpl.PRODUCT_CATEGORY_TABLE.TABLE_NAME + " pc "
+                JdbcTemplateProductCategoryRepoImpl.PRODUCT_CATEGORY_TABLE.TABLE_NAME + " pc "
                 +
                 """
                                                     
@@ -54,7 +53,7 @@ public class ProductRepoImpl implements ProductRepoInterface {
                         INNER JOIN
                         """
                 +
-                CategoryRepoImpl.CATEGORY_TABLE.TABLE_NAME + " c "
+                JdbcTemplateCategoryRepoImpl.CATEGORY_TABLE.TABLE_NAME + " c "
                 +
                 """
                             ON

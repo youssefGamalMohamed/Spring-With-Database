@@ -11,7 +11,7 @@ import java.sql.PreparedStatement;
 import java.util.Set;
 
 @Repository
-public class ProductCategoryRepoImpl implements ProductCategoryRepoInterface {
+public class JdbcTemplateProductCategoryRepoImpl implements ProductCategoryRepoInterface {
 
 
     public static class PRODUCT_CATEGORY_TABLE {

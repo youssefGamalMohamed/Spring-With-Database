@@ -16,7 +16,7 @@ import java.util.Optional;
 
 @Repository
 @Slf4j
-public class CategoryRepoImpl implements CategoryRepoInterface {
+public class JdbcTemplateCategoryRepoImpl implements CategoryRepoInterface {
 
 
     public static class CATEGORY_TABLE {
