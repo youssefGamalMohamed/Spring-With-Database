@@ -46,6 +46,10 @@ public class JdbcTemplateCategoryRepoImpl implements CategoryRepoInterface {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    @Autowired
+    private JdbcTemplateProductCategoryRepoImpl jdbcTemplateProductCategoryRepo;
+
+
     @Override
     public boolean isExistCategoryByNameIgnoreCase(String categoryName) {
         // Query to count categories with the given name (ignoring case)
@@ -112,8 +116,9 @@ public class JdbcTemplateCategoryRepoImpl implements CategoryRepoInterface {
 
     @Override
     public boolean deleteCategoryById(Integer categoryId) {
+        boolean isDeletedFromProductCategoryTable = jdbcTemplateProductCategoryRepo.deleteAllByCategoryId(categoryId);
         int isDeleted = jdbcTemplate.update(SQL_QUERIES.SQL_DELETE_CATEGORY_BY_ID , categoryId);
-        return (isDeleted == 1);
+        return  (isDeleted == 1) && isDeletedFromProductCategoryTable;
     }
 
     @Override

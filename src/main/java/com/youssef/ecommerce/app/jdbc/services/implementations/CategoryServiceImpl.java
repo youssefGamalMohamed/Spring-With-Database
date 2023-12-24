@@ -25,13 +25,8 @@ public class CategoryServiceImpl implements CategoryServiceInterface {
 
     // REPO
     @Autowired
-    @Qualifier("dataJdbcCategoryRepoImpl")
+    @Qualifier("jdbcTemplateCategoryRepoImpl")
     private CategoryRepoInterface categoryRepo;
-
-
-    //SERVICE
-    @Autowired
-    private ProductCategoryServiceInterface productCategoryService;
 
 
     @Override
@@ -72,7 +67,7 @@ public class CategoryServiceImpl implements CategoryServiceInterface {
 
     @Override
     public boolean deleteById(Integer categoryId) {
-        return productCategoryService.deleteAllByCategoryId(categoryId) & categoryRepo.deleteCategoryById(categoryId);
+        return categoryRepo.deleteCategoryById(categoryId);
     }
 
     @Override

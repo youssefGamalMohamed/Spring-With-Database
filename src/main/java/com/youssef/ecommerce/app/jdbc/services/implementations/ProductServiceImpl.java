@@ -30,7 +30,7 @@ public class ProductServiceImpl implements ProductServiceInterface {
 
     // REPOS
     @Autowired
-    @Qualifier("dataJdbcProductRepoImpl")
+    @Qualifier("jdbcTemplateProductRepoImpl")
     private ProductRepoInterface productRepo;
 
 
