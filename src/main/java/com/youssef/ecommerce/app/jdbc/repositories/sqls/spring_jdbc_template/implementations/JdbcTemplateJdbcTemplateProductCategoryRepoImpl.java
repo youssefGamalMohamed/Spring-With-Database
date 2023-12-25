@@ -1,8 +1,9 @@
-package com.youssef.ecommerce.app.jdbc.repositories.implementations;
+package com.youssef.ecommerce.app.jdbc.repositories.sqls.spring_jdbc_template.implementations;
 
 
 import com.youssef.ecommerce.app.jdbc.entities.ProductCategory;
-import com.youssef.ecommerce.app.jdbc.repositories.interfaces.ProductCategoryRepoInterface;
+import com.youssef.ecommerce.app.jdbc.repositories.sqls.spring_jdbc_template.interfaces.JdbcTemplateProductCategoryRepoInterface;
+import com.youssef.ecommerce.app.jdbc.repositories.sqls.spring_jdbc_template.models.JdbcTemplateProductCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -11,7 +12,7 @@ import java.sql.PreparedStatement;
 import java.util.Set;
 
 @Repository
-public class JdbcTemplateProductCategoryRepoImpl implements ProductCategoryRepoInterface {
+public class JdbcTemplateJdbcTemplateProductCategoryRepoImpl implements JdbcTemplateProductCategoryRepoInterface {
 
 
     public static class PRODUCT_CATEGORY_TABLE {
@@ -44,12 +45,12 @@ public class JdbcTemplateProductCategoryRepoImpl implements ProductCategoryRepoI
     }
 
     @Override
-    public void assignCategoriesToProduct(Set<ProductCategory> productCategories) {
+    public void assignCategoriesToProduct(Set<JdbcTemplateProductCategory> productCategories) {
         jdbcTemplate.batchUpdate(
                 SQL_QUERIES.SQL_SAVE_ROW,
                 productCategories,
                 SQL_QUERIES.BATCH_SIZE,
-                (PreparedStatement ps, ProductCategory productCategory) -> {
+                (PreparedStatement ps, JdbcTemplateProductCategory productCategory) -> {
                     ps.setInt(1,  productCategory.getProductId());
                     ps.setInt(2,  productCategory.getCategoryId());
                 }

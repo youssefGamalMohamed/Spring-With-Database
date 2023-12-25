@@ -1,7 +1,8 @@
 package com.youssef.ecommerce.app.jdbc.services.implementations;
 
 import com.youssef.ecommerce.app.jdbc.entities.ProductCategory;
-import com.youssef.ecommerce.app.jdbc.repositories.implementations.JdbcTemplateProductCategoryRepoImpl;
+import com.youssef.ecommerce.app.jdbc.repositories.sqls.spring_jdbc_template.implementations.JdbcTemplateJdbcTemplateProductCategoryRepoImpl;
+import com.youssef.ecommerce.app.jdbc.repositories.sqls.spring_jdbc_template.models.JdbcTemplateProductCategory;
 import com.youssef.ecommerce.app.jdbc.services.interfaces.ProductCategoryServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,15 +14,15 @@ import java.util.Set;
 public class ProductCategoryServiceImpl implements ProductCategoryServiceInterface {
 
     @Autowired
-    private JdbcTemplateProductCategoryRepoImpl productCategoryRepo;
+    private JdbcTemplateJdbcTemplateProductCategoryRepoImpl productCategoryRepo;
 
 
     @Override
     public void assignCategoriesToProduct(Integer productId, Set<Integer> categoriesId) {
-        Set<ProductCategory> productCategories = new HashSet<>();
+        Set<JdbcTemplateProductCategory> productCategories = new HashSet<>();
         categoriesId.forEach(
                 categoryId -> productCategories.add(
-                        ProductCategory.builder()
+                        JdbcTemplateProductCategory.builder()
                                 .productId(productId)
                                 .categoryId(categoryId)
                                 .build()

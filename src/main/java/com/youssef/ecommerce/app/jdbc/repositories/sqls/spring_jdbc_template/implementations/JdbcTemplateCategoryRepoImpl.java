@@ -1,5 +1,8 @@
-package com.youssef.ecommerce.app.jdbc.repositories.implementations;
+package com.youssef.ecommerce.app.jdbc.repositories.sqls.spring_jdbc_template.implementations;
 
+import com.youssef.ecommerce.app.jdbc.repositories.sqls.spring_jdbc_template.models.JdbcTemplateCategory;
+import com.youssef.ecommerce.app.jdbc.repositories.sqls.spring_jdbc_template.repo_to_service_mapper.JdbcTemplateCategoryServiceMapper;
+import com.youssef.ecommerce.app.jdbc.repositories.sqls.spring_jdbc_template.sqls_row_mappers.JdbcTemplateCategoryRowMapper;
 import com.youssef.ecommerce.app.jdbc.services.models.Category;
 import com.youssef.ecommerce.app.jdbc.repositories.core_interfaces.CategoryRepoInterface;
 import lombok.extern.slf4j.Slf4j;
@@ -46,7 +49,7 @@ public class JdbcTemplateCategoryRepoImpl implements CategoryRepoInterface {
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
-    private JdbcTemplateProductCategoryRepoImpl jdbcTemplateProductCategoryRepo;
+    private JdbcTemplateJdbcTemplateProductCategoryRepoImpl jdbcTemplateProductCategoryRepo;
 
 
     @Override
@@ -99,9 +102,9 @@ public class JdbcTemplateCategoryRepoImpl implements CategoryRepoInterface {
 
     @Override
     public Optional<Category> findCategoryById(Integer categoryId) {
-        Category category = null;
+        JdbcTemplateCategory category = null;
         try {
-//            category = jdbcTemplate.queryForObject(SQL_QUERIES.SQL_FIND_CATEGORY_BY_ID , new CategoryRowMapper() , categoryId);
+            category = jdbcTemplate.queryForObject(SQL_QUERIES.SQL_FIND_CATEGORY_BY_ID , new JdbcTemplateCategoryRowMapper() , categoryId);
         }
         catch (EmptyResultDataAccessException e) {
 
@@ -110,7 +113,7 @@ public class JdbcTemplateCategoryRepoImpl implements CategoryRepoInterface {
         if(category == null)
             return Optional.empty();
 
-        return Optional.of(category);
+        return Optional.of(JdbcTemplateCategoryServiceMapper.toServiceModel(category));
     }
 
     @Override
