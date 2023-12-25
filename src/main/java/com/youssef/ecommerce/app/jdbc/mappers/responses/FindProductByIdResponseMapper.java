@@ -1,7 +1,7 @@
 package com.youssef.ecommerce.app.jdbc.mappers.responses;
 
 
-import com.youssef.ecommerce.app.jdbc.entities.Product;
+import com.youssef.ecommerce.app.jdbc.services.models.Product;
 import com.youssef.ecommerce.app.jdbc.models.responses.FindProductByIdResponseBody;
 import lombok.*;
 

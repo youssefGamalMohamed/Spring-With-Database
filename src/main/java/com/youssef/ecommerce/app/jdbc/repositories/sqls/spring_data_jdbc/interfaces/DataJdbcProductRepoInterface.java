@@ -1,16 +1,14 @@
-package com.youssef.ecommerce.app.jdbc.repositories.interfaces;
+package com.youssef.ecommerce.app.jdbc.repositories.sqls.spring_data_jdbc.interfaces;
 
-import com.youssef.ecommerce.app.jdbc.entities.Product;
-import com.youssef.ecommerce.app.jdbc.mappers.sqls_rows.ProductWithCategoriesRowMapper;
+import com.youssef.ecommerce.app.jdbc.repositories.sqls.spring_data_jdbc.models.DataJdbcProduct;
+import com.youssef.ecommerce.app.jdbc.repositories.sqls.spring_data_jdbc.sqls_row_mappers.DataJdbcProductWithCategories;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
-public interface DataJdbcProductRepoInterface extends CrudRepository<Product,Integer> {
+public interface DataJdbcProductRepoInterface extends CrudRepository<DataJdbcProduct,Integer> {
 
 
     boolean existsByNameIgnoreCase(String productName);
@@ -40,7 +38,7 @@ public interface DataJdbcProductRepoInterface extends CrudRepository<Product,Int
             """
 
             ,
-            rowMapperClass =  ProductWithCategoriesRowMapper.class
+            rowMapperClass =  DataJdbcProductWithCategories.class
     )
-    Product findProductByIdWithCategories(@Param("id") Integer id);
+    DataJdbcProduct findProductByIdWithCategories(@Param("id") Integer id);
 }

@@ -1,7 +1,7 @@
 package com.youssef.ecommerce.app.jdbc.services.implementations;
 
-import com.youssef.ecommerce.app.jdbc.entities.Category;
-import com.youssef.ecommerce.app.jdbc.entities.Product;
+import com.youssef.ecommerce.app.jdbc.services.models.Category;
+import com.youssef.ecommerce.app.jdbc.services.models.Product;
 import com.youssef.ecommerce.app.jdbc.mappers.responses.FindProductByIdResponseMapper;
 import com.youssef.ecommerce.app.jdbc.mappers.responses.FindProductByIdWithCategoriesResponseMapper;
 import com.youssef.ecommerce.app.jdbc.models.requests.AddProductRequestBody;
@@ -9,9 +9,8 @@ import com.youssef.ecommerce.app.jdbc.models.requests.UpdateProductRequestBody;
 import com.youssef.ecommerce.app.jdbc.models.responses.AddProductResponseBody;
 import com.youssef.ecommerce.app.jdbc.models.responses.FindProductByIdResponseBody;
 import com.youssef.ecommerce.app.jdbc.models.responses.FindProductByIdWithCategoriesResponseBody;
-import com.youssef.ecommerce.app.jdbc.repositories.interfaces.ProductRepoInterface;
+import com.youssef.ecommerce.app.jdbc.repositories.core_interfaces.ProductRepoInterface;
 import com.youssef.ecommerce.app.jdbc.services.interfaces.CategoryServiceInterface;
-import com.youssef.ecommerce.app.jdbc.services.interfaces.ProductCategoryServiceInterface;
 import com.youssef.ecommerce.app.jdbc.services.interfaces.ProductServiceInterface;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

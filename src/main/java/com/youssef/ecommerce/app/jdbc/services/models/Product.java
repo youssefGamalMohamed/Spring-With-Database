@@ -1,6 +1,7 @@
-package com.youssef.ecommerce.app.jdbc.models.responses;
+package com.youssef.ecommerce.app.jdbc.services.models;
 
-import com.youssef.ecommerce.app.jdbc.services.models.Category;
+
+
 import lombok.*;
 
 import java.util.Set;
@@ -10,12 +11,17 @@ import java.util.Set;
 @Getter
 @Setter
 @Builder
-
-public class FindProductByIdWithCategoriesResponseBody {
+@ToString
+public class Product {
 
     private Integer id;
+
     private String name;
+
     private Integer quantity;
+
     private Double price;
+
     private Set<Category> categories;
+
 }

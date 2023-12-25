@@ -1,26 +1,25 @@
-package com.youssef.ecommerce.app.jdbc.repositories.interfaces;
+package com.youssef.ecommerce.app.jdbc.repositories.sqls.spring_data_jdbc.interfaces;
 
-import com.youssef.ecommerce.app.jdbc.entities.Category;
-import com.youssef.ecommerce.app.jdbc.mappers.sqls_rows.CategoryRowMapper;
+import com.youssef.ecommerce.app.jdbc.repositories.sqls.spring_data_jdbc.models.DataJdbcCategory;
+import com.youssef.ecommerce.app.jdbc.repositories.sqls.spring_data_jdbc.sqls_row_mappers.DataJdbcCategoryRowMapper;
 import org.springframework.data.jdbc.repository.query.Modifying;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.sql.ResultSet;
 import java.util.Optional;
 
 
 @Repository
-public interface DataJdbcCategoryRepoInterface extends CrudRepository<Category, Integer> {
+public interface DataJdbcCategoryRepoInterface extends CrudRepository<DataJdbcCategory, Integer> {
 
 
     boolean existsByNameIgnoreCase(String categoryName);
 
 
-    @Query(value = "SELECT * FROM categories WHERE category_id = :c_id LIMIT 1", rowMapperClass = CategoryRowMapper.class)
-    Optional<Category> findById(@Param("c_id") Integer c_id);
+    @Query(value = "SELECT * FROM categories WHERE category_id = :c_id LIMIT 1", rowMapperClass = DataJdbcCategoryRowMapper.class)
+    Optional<DataJdbcCategory> findById(@Param("c_id") Integer c_id);
 
     @Modifying
     @Query("""

@@ -1,20 +1,11 @@
 package com.youssef.ecommerce.app.jdbc.repositories.implementations;
 
-import com.youssef.ecommerce.app.jdbc.entities.Category;
-import com.youssef.ecommerce.app.jdbc.entities.Product;
-import com.youssef.ecommerce.app.jdbc.mappers.sqls_rows.ProductRowMapper;
-import com.youssef.ecommerce.app.jdbc.mappers.sqls_rows.ProductWithCategoriesRowMapper;
-import com.youssef.ecommerce.app.jdbc.repositories.interfaces.ProductRepoInterface;
+import com.youssef.ecommerce.app.jdbc.services.models.Product;
+import com.youssef.ecommerce.app.jdbc.repositories.core_interfaces.ProductRepoInterface;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
-
-import java.sql.PreparedStatement;
-import java.sql.Statement;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Repository
 @Slf4j
@@ -97,59 +88,65 @@ public class JdbcTemplateProductRepoImpl implements ProductRepoInterface {
     @Override
     public Product save(Product product) {
 
-        GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
-        jdbcTemplate.update(
-                conn -> {
-                    PreparedStatement preparedStatement = conn.prepareStatement(SQL_QUERIES.SQL_SAVE_PRODUCT, Statement.RETURN_GENERATED_KEYS);
-                    preparedStatement.setString(1, product.getName());
-                    preparedStatement.setDouble(2, product.getPrice());
-                    preparedStatement.setInt(3, product.getQuantity());
-                    log.info(">>>>> SQL = " + preparedStatement.toString());
-                    return preparedStatement;
-                }
-                , keyHolder
-        );
+//        GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
+//        jdbcTemplate.update(
+//                conn -> {
+//                    PreparedStatement preparedStatement = conn.prepareStatement(SQL_QUERIES.SQL_SAVE_PRODUCT, Statement.RETURN_GENERATED_KEYS);
+//                    preparedStatement.setString(1, product.getName());
+//                    preparedStatement.setDouble(2, product.getPrice());
+//                    preparedStatement.setInt(3, product.getQuantity());
+//                    log.info(">>>>> SQL = " + preparedStatement.toString());
+//                    return preparedStatement;
+//                }
+//                , keyHolder
+//        );
+//
+//        product.setId(keyHolder.getKey().intValue());
+//
+//        Set<Integer> categoriesIds = product.getCategories()
+//                .stream()
+//                .map(Category::getId)
+//                .collect(Collectors.toSet());
+//
+//        jdbcTemplateProductCategoryRepo.assignCategoriesToProduct(product.getId() , categoriesIds);
+//        return product;
 
-        product.setId(keyHolder.getKey().intValue());
-
-        Set<Integer> categoriesIds = product.getCategories()
-                .stream()
-                .map(Category::getId)
-                .collect(Collectors.toSet());
-
-        jdbcTemplateProductCategoryRepo.assignCategoriesToProduct(product.getId() , categoriesIds);
-        return product;
+        return null;
     }
 
     @Override
     public Product findById(Integer productId) {
-        Product product = null;
-        try {
-            product = jdbcTemplate.queryForObject(
-                    SQL_QUERIES.SQL_FIND_PRODUCT_BY_ID,
-                    new ProductRowMapper(),
-                    productId
-            );
-        } catch (Exception e) {
-            product = null;
-        }
-        return product;
+//        Product product = null;
+//        try {
+//            product = jdbcTemplate.queryForObject(
+//                    SQL_QUERIES.SQL_FIND_PRODUCT_BY_ID,
+//                    new ProductRowMapper(),
+//                    productId
+//            );
+//        } catch (Exception e) {
+//            product = null;
+//        }
+//        return product;
+
+        return null;
     }
 
     @Override
     public Product findByIdWithCategories(Integer productId) {
-        Product product = null;
-        try {
-            product = jdbcTemplate.queryForObject(
-                    SQL_QUERIES.SQL_FIND_PRODUCT_BY_ID_WITH_CATEGORIES_ASSOCIATED_WITH_IT,
-                    new ProductWithCategoriesRowMapper(),
-                    productId
-            );
-        } catch (Exception e) {
-            log.error(">>>>> ERROR WITH SQL STATEMENT EXECUTION = " + e.getMessage());
-            product = null;
-        }
-        return product;
+//        Product product = null;
+//        try {
+//            product = jdbcTemplate.queryForObject(
+//                    SQL_QUERIES.SQL_FIND_PRODUCT_BY_ID_WITH_CATEGORIES_ASSOCIATED_WITH_IT,
+//                    new ProductWithCategoriesRowMapper(),
+//                    productId
+//            );
+//        } catch (Exception e) {
+//            log.error(">>>>> ERROR WITH SQL STATEMENT EXECUTION = " + e.getMessage());
+//            product = null;
+//        }
+//        return product;
+
+        return null;
     }
 
     @Override

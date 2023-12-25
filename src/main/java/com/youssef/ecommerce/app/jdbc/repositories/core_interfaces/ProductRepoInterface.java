@@ -1,8 +1,6 @@
-package com.youssef.ecommerce.app.jdbc.repositories.interfaces;
+package com.youssef.ecommerce.app.jdbc.repositories.core_interfaces;
 
-import com.youssef.ecommerce.app.jdbc.entities.Product;
-
-import java.util.Optional;
+import com.youssef.ecommerce.app.jdbc.services.models.Product;
 
 public interface ProductRepoInterface {
 
