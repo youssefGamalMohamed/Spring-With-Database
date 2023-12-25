@@ -23,7 +23,7 @@ public class CategoryServiceImpl implements CategoryServiceInterface {
 
     // REPO
     @Autowired
-    @Qualifier("jdbcTemplateCategoryRepoImpl")
+    @Qualifier("jpaCategoryRepoImpl")
     private CategoryRepoInterface categoryRepo;
 
 
@@ -31,7 +31,7 @@ public class CategoryServiceImpl implements CategoryServiceInterface {
     @Override
     public Category addNewCategory(AddCategoryRequestBody categoryRequestBody) {
         if(categoryRepo.isExistCategoryByNameIgnoreCase(categoryRequestBody.getName())) {
-            log.error(">>>>> Category With Name = " + categoryRequestBody.getName() + " IS Already EXIST");
+            log.error(">>>>> JpaCategory With Name = " + categoryRequestBody.getName() + " IS Already EXIST");
             return null;
         }
         Category category = AddCategoryRequestBodyMapper.toServiceModel(categoryRequestBody);
@@ -51,7 +51,7 @@ public class CategoryServiceImpl implements CategoryServiceInterface {
         if(category.isEmpty()) {
             return null;
         }
-        log.info(">>>>> Category = " + category);
+        log.info(">>>>> JpaCategory = " + category);
         return category.get();
     }
 

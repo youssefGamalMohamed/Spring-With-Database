@@ -66,7 +66,7 @@ public class DataJdbcCategoryRepoImpl implements CategoryRepoInterface {
 
     @Override
     public boolean updateCategoryById(Integer categoryId, Category category) {
-//        Category categoryFromDB = categoryRepo.findById(categoryId).orElse(null);
+//        JpaCategory categoryFromDB = categoryRepo.findById(categoryId).orElse(null);
 //        if(categoryFromDB == null)
 //            return false;
 //        categoryFromDB.setName(category.getName());

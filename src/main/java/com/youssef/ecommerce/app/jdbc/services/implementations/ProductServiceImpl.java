@@ -42,19 +42,19 @@ public class ProductServiceImpl implements ProductServiceInterface {
     @Override
     public Product addNewProduct(AddProductRequestBody addProductRequestBody) {
         if (productRepo.isExistProductByNameIgnoreCase(addProductRequestBody.getName())) {
-            log.error(">>>>> Product With Name = " + addProductRequestBody.getName() + " IS Already EXIST");
+            log.error(">>>>> JpaProduct With Name = " + addProductRequestBody.getName() + " IS Already EXIST");
             return null;
         }
 
 
         Set<Category> categories = new HashSet<>();
-        // check existences of all Categories to assign it to the Product
+        // check existences of all Categories to assign it to the JpaProduct
         for (Integer categoryId : addProductRequestBody.getCategoriesIds()) {
             Optional<Category> category = categoryService.findCategoryById(categoryId);
             if (category.isEmpty()) {
                 throw new NoSuchElementException(
-                        "Can't Add Product , Reason : ( No Category with ID = " + categoryId + " to assign the " +
-                        "this category for the Product )"
+                        "Can't Add JpaProduct , Reason : ( No JpaCategory with ID = " + categoryId + " to assign the " +
+                        "this category for the JpaProduct )"
                 );
             }
             else {
