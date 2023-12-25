@@ -1,6 +1,5 @@
 package com.youssef.ecommerce.app.jdbc.services.implementations;
 
-import com.youssef.ecommerce.app.jdbc.entities.ProductCategory;
 import com.youssef.ecommerce.app.jdbc.repositories.sqls.spring_jdbc_template.implementations.JdbcTemplateJdbcTemplateProductCategoryRepoImpl;
 import com.youssef.ecommerce.app.jdbc.repositories.sqls.spring_jdbc_template.models.JdbcTemplateProductCategory;
 import com.youssef.ecommerce.app.jdbc.services.interfaces.ProductCategoryServiceInterface;

@@ -1,7 +1,5 @@
 package com.youssef.ecommerce.app.jdbc.repositories.sqls.spring_jdbc_template.sqls_row_mappers;
 
-import com.youssef.ecommerce.app.jdbc.entities.Category;
-import com.youssef.ecommerce.app.jdbc.entities.Product;
 import com.youssef.ecommerce.app.jdbc.repositories.sqls.spring_jdbc_template.implementations.JdbcTemplateCategoryRepoImpl;
 import com.youssef.ecommerce.app.jdbc.repositories.sqls.spring_jdbc_template.implementations.JdbcTemplateProductRepoImpl;
 import com.youssef.ecommerce.app.jdbc.repositories.sqls.spring_jdbc_template.models.JdbcTemplateCategory;

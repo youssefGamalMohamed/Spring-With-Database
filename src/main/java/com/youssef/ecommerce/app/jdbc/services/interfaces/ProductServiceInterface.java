@@ -1,6 +1,5 @@
 package com.youssef.ecommerce.app.jdbc.services.interfaces;
 
-import com.youssef.ecommerce.app.jdbc.entities.Product;
 import com.youssef.ecommerce.app.jdbc.models.requests.AddProductRequestBody;
 import com.youssef.ecommerce.app.jdbc.models.requests.UpdateProductRequestBody;
 import com.youssef.ecommerce.app.jdbc.models.responses.AddProductResponseBody;

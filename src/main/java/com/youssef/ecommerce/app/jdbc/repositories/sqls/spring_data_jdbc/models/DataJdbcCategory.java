@@ -2,8 +2,6 @@ package com.youssef.ecommerce.app.jdbc.repositories.sqls.spring_data_jdbc.models
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.youssef.ecommerce.app.jdbc.entities.Product;
-import com.youssef.ecommerce.app.jdbc.entities.ProductCategory;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;

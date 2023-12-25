@@ -1,6 +1,5 @@
 package com.youssef.ecommerce.app.jdbc.services.interfaces;
 
-import com.youssef.ecommerce.app.jdbc.entities.ProductCategory;
 
 import java.util.Set;
 
