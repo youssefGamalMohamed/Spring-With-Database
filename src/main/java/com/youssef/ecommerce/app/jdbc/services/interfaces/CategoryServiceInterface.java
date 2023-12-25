@@ -1,6 +1,6 @@
 package com.youssef.ecommerce.app.jdbc.services.interfaces;
 
-import com.youssef.ecommerce.app.jdbc.entities.Category;
+import com.youssef.ecommerce.app.jdbc.services.models.Category;
 import com.youssef.ecommerce.app.jdbc.models.requests.AddCategoryRequestBody;
 import com.youssef.ecommerce.app.jdbc.models.requests.UpdateCategoryRequestBody;
 import com.youssef.ecommerce.app.jdbc.models.responses.AddCategoryResponseBody;

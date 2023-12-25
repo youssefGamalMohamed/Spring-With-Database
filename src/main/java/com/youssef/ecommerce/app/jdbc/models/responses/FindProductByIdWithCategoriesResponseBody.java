@@ -1,6 +1,6 @@
 package com.youssef.ecommerce.app.jdbc.models.responses;
 
-import com.youssef.ecommerce.app.jdbc.entities.Category;
+import com.youssef.ecommerce.app.jdbc.services.models.Category;
 import lombok.*;
 
 import java.util.Set;

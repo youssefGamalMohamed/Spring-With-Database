@@ -1,13 +1,15 @@
-package com.youssef.ecommerce.app.jdbc.repositories.implementations;
+package com.youssef.ecommerce.app.jdbc.repositories.sqls.spring_data_jdbc.implementations;
 
-import com.youssef.ecommerce.app.jdbc.entities.Category;
-import com.youssef.ecommerce.app.jdbc.repositories.interfaces.CategoryRepoInterface;
-import com.youssef.ecommerce.app.jdbc.repositories.interfaces.DataJdbcCategoryRepoInterface;
+
+import com.youssef.ecommerce.app.jdbc.repositories.core_interfaces.CategoryRepoInterface;
+import com.youssef.ecommerce.app.jdbc.repositories.sqls.spring_data_jdbc.interfaces.DataJdbcCategoryRepoInterface;
+import com.youssef.ecommerce.app.jdbc.repositories.sqls.spring_data_jdbc.models.DataJdbcCategory;
+import com.youssef.ecommerce.app.jdbc.repositories.sqls.spring_data_jdbc.repo_to_service_mapper.DataJdbcCategoryServiceMapper;
+import com.youssef.ecommerce.app.jdbc.services.models.Category;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashSet;
 import java.util.Optional;
 
 
@@ -25,8 +27,13 @@ public class DataJdbcCategoryRepoImpl implements CategoryRepoInterface {
 
     @Override
     public Category saveCategory(Category category) {
-        category.setProducts(new HashSet<>());
-        return categoryRepo.save(category);
+        DataJdbcCategory entity = DataJdbcCategory.builder()
+                .name(category.getName())
+                .build();
+
+        return DataJdbcCategoryServiceMapper.toServiceModel(
+                categoryRepo.save(entity)
+        );
     }
 
     @Override
@@ -36,7 +43,12 @@ public class DataJdbcCategoryRepoImpl implements CategoryRepoInterface {
 
     @Override
     public Optional<Category> findCategoryById(Integer categoryId) {
-        return categoryRepo.findById(categoryId);
+        Optional<DataJdbcCategory> entity = categoryRepo.findById(categoryId);
+        if(entity.isEmpty())
+            return Optional.empty();
+        return Optional.of(
+                DataJdbcCategoryServiceMapper.toServiceModel(entity.get())
+        );
     }
 
     @Override

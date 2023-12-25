@@ -1,8 +1,7 @@
 package com.youssef.ecommerce.app.jdbc.repositories.implementations;
 
-import com.youssef.ecommerce.app.jdbc.entities.Category;
-import com.youssef.ecommerce.app.jdbc.mappers.sqls_rows.CategoryRowMapper;
-import com.youssef.ecommerce.app.jdbc.repositories.interfaces.CategoryRepoInterface;
+import com.youssef.ecommerce.app.jdbc.services.models.Category;
+import com.youssef.ecommerce.app.jdbc.repositories.core_interfaces.CategoryRepoInterface;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -98,7 +97,7 @@ public class JdbcTemplateCategoryRepoImpl implements CategoryRepoInterface {
     public Optional<Category> findCategoryById(Integer categoryId) {
         Category category = null;
         try {
-            category = jdbcTemplate.queryForObject(SQL_QUERIES.SQL_FIND_CATEGORY_BY_ID , new CategoryRowMapper() , categoryId);
+//            category = jdbcTemplate.queryForObject(SQL_QUERIES.SQL_FIND_CATEGORY_BY_ID , new CategoryRowMapper() , categoryId);
         }
         catch (EmptyResultDataAccessException e) {
 
