@@ -1,11 +1,11 @@
-package com.youssef.ecommerce.app.jdbc.mappers.responses;
+package com.youssef.ecommerce.app.jdbc.controllers.mappers.responses;
 
 import com.youssef.ecommerce.app.jdbc.services.models.Product;
-import com.youssef.ecommerce.app.jdbc.models.responses.FindProductByIdWithCategoriesResponseBody;
+import com.youssef.ecommerce.app.jdbc.controllers.models.responses.FindProductByIdWithCategoriesResponseBody;
 
 public class FindProductByIdWithCategoriesResponseMapper {
 
-    public static FindProductByIdWithCategoriesResponseBody toResponse(Product product) {
+    public static FindProductByIdWithCategoriesResponseBody toControllerModel(Product product) {
         return FindProductByIdWithCategoriesResponseBody.builder()
                 .id(product.getId())
                 .name(product.getName())

@@ -1,4 +1,4 @@
-package com.youssef.ecommerce.app.jdbc.models.responses;
+package com.youssef.ecommerce.app.jdbc.controllers.models.responses;
 
 
 import lombok.*;

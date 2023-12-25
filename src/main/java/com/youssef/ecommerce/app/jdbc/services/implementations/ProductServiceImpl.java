@@ -2,13 +2,13 @@ package com.youssef.ecommerce.app.jdbc.services.implementations;
 
 import com.youssef.ecommerce.app.jdbc.services.models.Category;
 import com.youssef.ecommerce.app.jdbc.services.models.Product;
-import com.youssef.ecommerce.app.jdbc.mappers.responses.FindProductByIdResponseMapper;
-import com.youssef.ecommerce.app.jdbc.mappers.responses.FindProductByIdWithCategoriesResponseMapper;
-import com.youssef.ecommerce.app.jdbc.models.requests.AddProductRequestBody;
-import com.youssef.ecommerce.app.jdbc.models.requests.UpdateProductRequestBody;
-import com.youssef.ecommerce.app.jdbc.models.responses.AddProductResponseBody;
-import com.youssef.ecommerce.app.jdbc.models.responses.FindProductByIdResponseBody;
-import com.youssef.ecommerce.app.jdbc.models.responses.FindProductByIdWithCategoriesResponseBody;
+import com.youssef.ecommerce.app.jdbc.controllers.mappers.responses.FindProductByIdResponseMapper;
+import com.youssef.ecommerce.app.jdbc.controllers.mappers.responses.FindProductByIdWithCategoriesResponseMapper;
+import com.youssef.ecommerce.app.jdbc.controllers.models.requests.AddProductRequestBody;
+import com.youssef.ecommerce.app.jdbc.controllers.models.requests.UpdateProductRequestBody;
+import com.youssef.ecommerce.app.jdbc.controllers.models.responses.AddProductResponseBody;
+import com.youssef.ecommerce.app.jdbc.controllers.models.responses.FindProductByIdResponseBody;
+import com.youssef.ecommerce.app.jdbc.controllers.models.responses.FindProductByIdWithCategoriesResponseBody;
 import com.youssef.ecommerce.app.jdbc.repositories.core_interfaces.ProductRepoInterface;
 import com.youssef.ecommerce.app.jdbc.services.interfaces.CategoryServiceInterface;
 import com.youssef.ecommerce.app.jdbc.services.interfaces.ProductServiceInterface;
@@ -40,12 +40,10 @@ public class ProductServiceImpl implements ProductServiceInterface {
 
 
     @Override
-    public AddProductResponseBody addNewProduct(AddProductRequestBody addProductRequestBody) {
+    public Product addNewProduct(AddProductRequestBody addProductRequestBody) {
         if (productRepo.isExistProductByNameIgnoreCase(addProductRequestBody.getName())) {
             log.error(">>>>> Product With Name = " + addProductRequestBody.getName() + " IS Already EXIST");
-            return AddProductResponseBody.builder()
-                    .id(null)
-                    .build();
+            return null;
         }
 
 
@@ -74,27 +72,25 @@ public class ProductServiceImpl implements ProductServiceInterface {
         product = productRepo.save(product);
 
 
-        return AddProductResponseBody.builder()
-                .id(product.getId())
-                .build();
+        return product;
     }
 
     @Override
-    public FindProductByIdResponseBody findById(Integer productId) {
+    public Product findById(Integer productId) {
         Product product = productRepo.findById(productId);
         if(product == null)
             product = Product.builder().build();
         log.info(">>>>>> PRODUCT WITH ID = " + productId + " ==> " + product);
-        return FindProductByIdResponseMapper.toResponse(product);
+        return product;
     }
 
     @Override
-    public FindProductByIdWithCategoriesResponseBody findByIdWithCategories(Integer productId) {
+    public Product findByIdWithCategories(Integer productId) {
         Product product = productRepo.findByIdWithCategories(productId);
         if(product == null)
             product = Product.builder().build();
         log.info(">>>>> PRODUCT WITH ID = " + productId + " ==> " + product);
-        return FindProductByIdWithCategoriesResponseMapper.toResponse(product);
+        return product;
     }
 
     @Override

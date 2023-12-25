@@ -2,12 +2,11 @@ package com.youssef.ecommerce.app.jdbc.services.implementations;
 
 
 import com.youssef.ecommerce.app.jdbc.services.models.Category;
-import com.youssef.ecommerce.app.jdbc.mappers.requests.AddCategoryRequestBodyMapper;
-import com.youssef.ecommerce.app.jdbc.mappers.requests.UpdateCategoryRequestBodyMapper;
-import com.youssef.ecommerce.app.jdbc.models.requests.AddCategoryRequestBody;
-import com.youssef.ecommerce.app.jdbc.models.requests.UpdateCategoryRequestBody;
-import com.youssef.ecommerce.app.jdbc.models.responses.AddCategoryResponseBody;
-import com.youssef.ecommerce.app.jdbc.models.responses.FindCategoryByIdResponse;
+import com.youssef.ecommerce.app.jdbc.controllers.mappers.requests.AddCategoryRequestBodyMapper;
+import com.youssef.ecommerce.app.jdbc.controllers.mappers.requests.UpdateCategoryRequestBodyMapper;
+import com.youssef.ecommerce.app.jdbc.controllers.models.requests.AddCategoryRequestBody;
+import com.youssef.ecommerce.app.jdbc.controllers.models.requests.UpdateCategoryRequestBody;
+import com.youssef.ecommerce.app.jdbc.controllers.models.responses.FindCategoryByIdResponse;
 import com.youssef.ecommerce.app.jdbc.repositories.core_interfaces.CategoryRepoInterface;
 import com.youssef.ecommerce.app.jdbc.services.interfaces.CategoryServiceInterface;
 import lombok.extern.slf4j.Slf4j;
@@ -30,19 +29,15 @@ public class CategoryServiceImpl implements CategoryServiceInterface {
 
 
     @Override
-    public AddCategoryResponseBody addNewCategory(AddCategoryRequestBody categoryRequestBody) {
+    public Category addNewCategory(AddCategoryRequestBody categoryRequestBody) {
         if(categoryRepo.isExistCategoryByNameIgnoreCase(categoryRequestBody.getName())) {
             log.error(">>>>> Category With Name = " + categoryRequestBody.getName() + " IS Already EXIST");
-            return AddCategoryResponseBody.builder()
-                    .id(null)
-                    .build();
+            return null;
         }
         Category category = AddCategoryRequestBodyMapper.toServiceModel(categoryRequestBody);
         category = categoryRepo.saveCategory(category);
 
-        return AddCategoryResponseBody.builder()
-                .id(category.getId())
-                .build();
+        return category;
     }
 
     @Override
@@ -51,18 +46,13 @@ public class CategoryServiceImpl implements CategoryServiceInterface {
     }
 
     @Override
-    public FindCategoryByIdResponse findById(Integer categoryId) {
+    public Category findById(Integer categoryId) {
         Optional<Category> category = categoryRepo.findCategoryById(categoryId);
         if(category.isEmpty()) {
-            return FindCategoryByIdResponse.builder()
-                    .id(null)
-                    .build();
+            return null;
         }
         log.info(">>>>> Category = " + category);
-        return FindCategoryByIdResponse.builder()
-                .id(category.get().getId())
-                .name(category.get().getName())
-                .build();
+        return category.get();
     }
 
     @Override

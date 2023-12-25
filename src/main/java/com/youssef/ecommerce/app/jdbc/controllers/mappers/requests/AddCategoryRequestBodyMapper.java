@@ -1,7 +1,7 @@
-package com.youssef.ecommerce.app.jdbc.mappers.requests;
+package com.youssef.ecommerce.app.jdbc.controllers.mappers.requests;
 
 import com.youssef.ecommerce.app.jdbc.services.models.Category;
-import com.youssef.ecommerce.app.jdbc.models.requests.AddCategoryRequestBody;
+import com.youssef.ecommerce.app.jdbc.controllers.models.requests.AddCategoryRequestBody;
 
 public class AddCategoryRequestBodyMapper {
 

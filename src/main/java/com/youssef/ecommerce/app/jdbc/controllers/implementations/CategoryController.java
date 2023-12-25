@@ -1,11 +1,13 @@
-package com.youssef.ecommerce.app.jdbc.controllers;
+package com.youssef.ecommerce.app.jdbc.controllers.implementations;
 
 
-import com.youssef.ecommerce.app.jdbc.models.requests.AddCategoryRequestBody;
-import com.youssef.ecommerce.app.jdbc.models.requests.UpdateCategoryRequestBody;
-import com.youssef.ecommerce.app.jdbc.models.responses.AddCategoryResponseBody;
-import com.youssef.ecommerce.app.jdbc.models.responses.FindCategoryByIdResponse;
+import com.youssef.ecommerce.app.jdbc.controllers.mappers.responses.AddCategoryResponseMapper;
+import com.youssef.ecommerce.app.jdbc.controllers.mappers.responses.FindCategoryByIdResponseMapper;
+import com.youssef.ecommerce.app.jdbc.controllers.models.requests.AddCategoryRequestBody;
+import com.youssef.ecommerce.app.jdbc.controllers.models.requests.UpdateCategoryRequestBody;
+import com.youssef.ecommerce.app.jdbc.controllers.models.responses.FindCategoryByIdResponse;
 import com.youssef.ecommerce.app.jdbc.services.implementations.CategoryServiceImpl;
+import com.youssef.ecommerce.app.jdbc.services.models.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,17 +24,22 @@ public class CategoryController {
 
     @PostMapping
     public ResponseEntity<?> addCategory(@RequestBody AddCategoryRequestBody categoryRequestBody) {
-        AddCategoryResponseBody addCategoryResponseBody = categoryService.addNewCategory(categoryRequestBody);
-        if (addCategoryResponseBody.getId() == null) return new ResponseEntity<>(HttpStatus.CONFLICT);
-        return new ResponseEntity<>(addCategoryResponseBody, HttpStatus.CREATED);
+        Category category = categoryService.addNewCategory(categoryRequestBody);
+        if (category.getId() == null) return new ResponseEntity<>(HttpStatus.CONFLICT);
+        return new ResponseEntity<>(
+                AddCategoryResponseMapper.toControllerModel(category),
+                HttpStatus.CREATED
+        );
     }
 
 
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable("id") Integer categoryId) {
-        FindCategoryByIdResponse response = categoryService.findById(categoryId);
-        if (response.getId() == null) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        return ResponseEntity.ok(response);
+        Category category = categoryService.findById(categoryId);
+        if (category.getId() == null) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return ResponseEntity.ok(
+                FindCategoryByIdResponseMapper.toControllerModel(category)
+        );
     }
 
 

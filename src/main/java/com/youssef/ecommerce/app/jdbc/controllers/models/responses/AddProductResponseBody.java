@@ -1,4 +1,4 @@
-package com.youssef.ecommerce.app.jdbc.models.responses;
+package com.youssef.ecommerce.app.jdbc.controllers.models.responses;
 
 import lombok.*;
 
@@ -7,6 +7,6 @@ import lombok.*;
 @Getter
 @Setter
 @Builder
-public class AddCategoryResponseBody {
+public class AddProductResponseBody {
     private Integer id;
 }
