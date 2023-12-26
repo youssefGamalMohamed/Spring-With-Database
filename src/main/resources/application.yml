@@ -15,9 +15,14 @@ spring:
   data:
     mongodb:
       uri: mongodb://localhost:27017/ecommerce
+
 logging:
   level:
     org:
       springframework:
         jdbc:
           core: trace
+        data:
+          mongodb:
+            core:
+              MongoTemplate: trace
