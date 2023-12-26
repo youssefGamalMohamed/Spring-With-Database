@@ -29,7 +29,7 @@ public class ProductServiceImpl implements ProductServiceInterface {
 
     // REPOS
     @Autowired
-    @Qualifier("jpaProductRepoImpl")
+    @Qualifier("mongoProductRepoImpl")
     private ProductRepoInterface productRepo;
 
 

@@ -23,7 +23,7 @@ public class CategoryServiceImpl implements CategoryServiceInterface {
 
     // REPO
     @Autowired
-    @Qualifier("jpaCategoryRepoImpl")
+    @Qualifier("mongoCategoryRepoImpl")
     private CategoryRepoInterface categoryRepo;
 
 

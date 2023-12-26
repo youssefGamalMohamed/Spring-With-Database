@@ -25,7 +25,7 @@ public class CategoryController {
     @PostMapping
     public ResponseEntity<?> addCategory(@RequestBody AddCategoryRequestBody categoryRequestBody) {
         Category category = categoryService.addNewCategory(categoryRequestBody);
-        if (category.getId() == null) return new ResponseEntity<>(HttpStatus.CONFLICT);
+        if (category == null) return new ResponseEntity<>(HttpStatus.CONFLICT);
         return new ResponseEntity<>(
                 AddCategoryResponseMapper.toControllerModel(category),
                 HttpStatus.CREATED
@@ -36,7 +36,7 @@ public class CategoryController {
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable("id") Integer categoryId) {
         Category category = categoryService.findById(categoryId);
-        if (category.getId() == null) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        if (category == null) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         return ResponseEntity.ok(
                 FindCategoryByIdResponseMapper.toControllerModel(category)
         );
