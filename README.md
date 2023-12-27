@@ -17,6 +17,13 @@ To solve this problem, we need to refactor our code to be able to change or add 
 As we see here can extend our Data Layer by adding any Database
 ![Spring-With-Database drawio (1)](https://github.com/youssefGamalMohamed/Spring-With-Database/assets/47324621/5d511efe-2f9e-41fb-975f-12d8efcb4729)
 
+## Features
+Implementing Multi-Database ( SQL , NoSQL ) in Data Layer with different ways:
+-  **Spring Jdbc Template With MySQL**
+-  **Spring Data Jdbc With MySQL**
+-  **Spring Data Jpa With**
+   - **MySQL**
+   - **MongoDb**
 
 ## Code
 In the Service Layer when we need to tell the Data Layer which Database we need to use then we need to change only the Bean name to the Bean of the required Data Layer implementation as an example
