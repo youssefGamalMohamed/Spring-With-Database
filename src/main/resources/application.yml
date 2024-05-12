@@ -26,3 +26,6 @@ logging:
           mongodb:
             core:
               MongoTemplate: trace
+      jooq:
+        tools:
+          LoggerListener: debug
