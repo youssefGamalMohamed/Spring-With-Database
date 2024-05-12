@@ -6,7 +6,6 @@ import com.youssef.ecommerce.app.jdbc.controllers.mappers.requests.AddCategoryRe
 import com.youssef.ecommerce.app.jdbc.controllers.mappers.requests.UpdateCategoryRequestBodyMapper;
 import com.youssef.ecommerce.app.jdbc.controllers.models.requests.AddCategoryRequestBody;
 import com.youssef.ecommerce.app.jdbc.controllers.models.requests.UpdateCategoryRequestBody;
-import com.youssef.ecommerce.app.jdbc.controllers.models.responses.FindCategoryByIdResponse;
 import com.youssef.ecommerce.app.jdbc.repositories.core_interfaces.CategoryRepoInterface;
 import com.youssef.ecommerce.app.jdbc.services.interfaces.CategoryServiceInterface;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +22,7 @@ public class CategoryServiceImpl implements CategoryServiceInterface {
 
     // REPO
     @Autowired
-    @Qualifier("mongoCategoryRepoImpl")
+    @Qualifier("jooqCategoryRepoImpl")
     private CategoryRepoInterface categoryRepo;
 
 
