@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  spring-app:
+    image: maven:3.8.8-eclipse-temurin-17
+    container_name: spring-app-database-app
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: mvn clean spring-boot:run
+    ports:
+      - "9090:9090"
+    depends_on:
+      - mysql
+      - mongo
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/ecommerce
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 1234
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_SHOW_SQL: "true"
+      SPRING_DATA_MONGODB_URI: mongodb://mongo:27017/ecommerce
+      SERVER_PORT: 9090
+      SERVER_SERVLET_CONTEXT_PATH: /ecommerce/api/v1
+    networks:
+      - spring-network
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: ecommerce
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - spring-network
+
+  mongo:
+    image: mongo:4.4
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - spring-network
+
+networks:
+  spring-network:
+    driver: bridge
+
+volumes:
+  mysql_data:
+  mongo_data:
