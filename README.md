@@ -1,60 +1,92 @@
 
-# Spring Boot With Database ( SQL, NoSQL )
+# Spring Boot With Database (SQL, NoSQL)
 
-This project applied simple CRUD e-commerce API with an extendable Data Layer and allowed code extendability for connecting to either SQL as MySQL or NoSQL as MongoDB
-
+This project implements a simple CRUD e-commerce API with an extendable data layer that supports both SQL (MySQL) and NoSQL (MongoDB) databases.
 
 ## Problem
 
-The problem that we face is that when we make the service layer tightly coupled with the data layer, it makes the code hard to maintain and develop. If you write the code for Service Layer Tight Coupled with Data Layer and for some reason you have a new change that says "We need to Switch from SQL to NoSQL DB" or vice versa, then that is the problem; the code is not able to be extendable for adding or changing the Data Layer to another Database
-
+The problem we face is that when the service layer is tightly coupled with the data layer, it becomes difficult to maintain and develop the code. If you need to switch from an SQL to a NoSQL database (or vice versa), the code is not easily extendable to accommodate such changes.
 
 ## Solution
-To solve this problem, we need to refactor our code to be able to change or add any database by isolating the data layer from the service layer by sending only the objects that each of them (data layer, service layer) knows and the data layer converts the object to new object that he can store in the database (SQL, NoSQL)
 
+To address this issue, we refactor the code to isolate the data layer from the service layer. This allows for the addition or change of databases by sending objects between layers that each knows how to handle, with the data layer converting these objects to the appropriate format for storage in SQL or NoSQL databases.
 
 ## Architecture
-As we see here can extend our Data Layer by adding any Database
+
+The architecture allows for easy extension of the data layer by adding any database. 
+
 ![Spring-With-Database drawio (1)](https://github.com/youssefGamalMohamed/Spring-With-Database/assets/47324621/5d511efe-2f9e-41fb-975f-12d8efcb4729)
 
 ## Features
-Implementing Multi-Database ( SQL , NoSQL ) in Data Layer with different ways:
--  **JOOQ With MySQL**
--  **Spring Jdbc Template With MySQL**
--  **Spring Data Jdbc With MySQL**
--  **Spring Data Jpa With**
+
+Implementing multi-database support (SQL, NoSQL) in the data layer with different approaches:
+- **JOOQ With MySQL**
+- **Spring Jdbc Template With MySQL**
+- **Spring Data Jdbc With MySQL**
+- **Spring Data JPA With**
    - **MySQL**
-   - **MongoDb**
+   - **MongoDB**
 
 ## Code
-In the Service Layer when we need to tell the Data Layer which Database we need to use then we need to change only the Bean name to the Bean of the required Data Layer implementation as an example
+
+In the service layer, to specify which database to use, you need to change the bean name to the corresponding data layer implementation. For example:
 
 - **ProductServiceImpl.java**
-  here we need to change the qualifier name for the implementation of the database repository
-    ```
+  Change the qualifier name to the appropriate database repository implementation:
+    ```java
     @Autowired
     @Qualifier("mongoProductRepoImpl") <--------------
     private ProductRepoInterface productRepo;
     ```
+
 - **CategoryServiceImpl.java**
-  and also here we will follow the same step
-    ```
+  Follow the same step for the category repository:
+    ```java
     @Autowired
     @Qualifier("mongoCategoryRepoImpl") <--------------
     private CategoryRepoInterface categoryRepo;
     ```
 
 ## Installation Prerequisites
-- Programming Languages
-  - > Java 17
-    
-- Databases
-  - > MySQL 8
-  - > MongoDB
-    
-- Build Tool
-  - > Maven 
 
+- **Programming Languages**
+  - Java 17
+    
+- **Databases**
+  - MySQL 8
+  - MongoDB
+    
+- **Build Tool**
+  - Maven 
+
+## Docker Compose
+
+To run the application using Docker Compose, follow these steps:
+
+1. **Ensure Docker and Docker Compose are installed** on your system. You can download Docker Desktop from [Docker's official website](https://www.docker.com/products/docker-desktop).
+
+2. **Clone the repository** if you haven't already:
+   ```bash
+   git clone https://github.com/youssefGamalMohamed/spring-boot-database.git
+   cd spring-boot-database
+   ```
+
+3. **Build and run the Docker containers** using Docker Compose:
+   ```bash
+   docker-compose up --build
+   ```
+
+   This command will build the Docker images and start the containers defined in the `docker-compose.yml` file.
+
+4. **Access the application**:
+   - The Spring Boot application should be available at `http://localhost:8080` by default.
+
+5. **Stop the Docker containers**:
+   To stop the running containers, use:
+   ```bash
+   docker-compose down
+   ```
 
 ## Postman Collection 
-- Download Postman Collection From [here](https://github.com/youssefGamalMohamed/Spring-With-Database/blob/0a7f08ea1c8ee4bc88e2437f85e990599afc1d55/Ecommerce.postman_collection.json)
+
+- Download the Postman Collection from [here](https://github.com/youssefGamalMohamed/Spring-With-Database/blob/0a7f08ea1c8ee4bc88e2437f85e990599afc1d55/Ecommerce.postman_collection.json)
